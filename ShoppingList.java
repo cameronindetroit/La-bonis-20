@@ -30,10 +30,10 @@ public class ShoppingList {
 		// Fill inventory using method
 		inventory = ShoppingListMethods.fillInventory(inventory);
 
-		// displays the inventory using method
-		ShoppingListMethods.displayInventory(inventory);
-
 		do {
+			// displays the inventory using method
+			ShoppingListMethods.displayInventory(inventory);
+
 			// Enter item name
 			prompt = "What would you like to order?";
 			newItem = ShoppingListMethods.enterItem(scnr, inventory, prompt);
@@ -59,11 +59,11 @@ public class ShoppingList {
 		// Display average of all items in cart
 		ShoppingListMethods.average(shoppingCart, inventory);
 
-		// Display price of most expensive item
-		ShoppingListMethods.highest(shoppingCart, inventory);
+		System.out.println("Press any key to continue");
 
-		// Display price of least expensive item
-		ShoppingListMethods.lowest(shoppingCart, inventory);
+		// Continue method call
+		ShoppingListMethods.pressAnyKey(scnr, shoppingCart, inventory);
 
 	}
+
 }

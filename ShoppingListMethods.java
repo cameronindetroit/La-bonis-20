@@ -112,4 +112,22 @@ public class ShoppingListMethods {
 		System.out.println("The lowest price for your items is: " + lowest);
 	}
 
+	// Continue when any key is pushed method
+	public static void pressAnyKey(Scanner scnr, ArrayList<String> shoppingCart, HashMap<String, Double> inventory) {
+		String userInput = scnr.next();
+
+		if (userInput.equals("\\s.*")) {
+
+		} else {
+			// Display price of most expensive item
+			ShoppingListMethods.highest(shoppingCart, inventory);
+
+			// Display price of least expensive item
+			ShoppingListMethods.lowest(shoppingCart, inventory);
+
+			System.out.println("Exit Program");
+		}
+
+	}
+
 }

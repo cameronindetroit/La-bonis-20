@@ -26,13 +26,15 @@ public class ShoppingListMethods {
 		System.out.println(prompt);
 		String userInput = scnr.nextLine().toLowerCase();
 
-		if (inventory.containsKey(userInput)) {
-			System.out.println("confirmation! " + userInput + " added to cart!");
+		do {
+			if (inventory.containsKey(userInput)) {
+				System.out.println("confirmation! " + userInput + " added to cart!");
 
-		} else {
-			System.out.println("item is not available. Please choose an item in out inventory");
-			enterItem(scnr, inventory, prompt);
-		}
+			} else {
+				System.out.println("item is not available. Please choose an item in our inventory");
+				return enterItem(scnr, inventory, prompt);
+			}
+		} while (!inventory.containsKey(userInput));
 
 		return userInput;
 	}
@@ -52,7 +54,7 @@ public class ShoppingListMethods {
 
 	}
 
-	// Disply Inventory Method
+	// Display Inventory Method
 	public static void displayInventory(HashMap<String, Double> inventory) {
 
 		// String format = "%s\t\t%s";

@@ -1,4 +1,5 @@
 package collections;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -38,34 +39,53 @@ public class ShoppingList {
 		boolean isValid = false;
 		String yesOrNo = "yes";
 
+		inventory = fillInventory(inventory);
+		// displays the inventory
+		displayInventory(inventory);
+
 		do {
 			// Enter item name
 			prompt = "What would you like to order?";
 			// fills the Inventory
-			inventory = fillInventory(inventory);
-			// displays the inventory
-			displayInventory(inventory);
+			newItem = enterItem(scnr, inventory, prompt);
+
+			// Conditional to make sure valid item is being added to shopping cart
+
+			shoppingCart.add(newItem);
+
 			System.out.println();
 
 			// add that item, to the shoppingCart
-			newItem = enterItem(scnr, inventory, prompt);
-			shoppingCart.add(newItem);
-			System.out.println("Would you like to order anything else (y/n)?");
-			yesOrNo = scnr.nextLine().toLowerCase();
 
-			if (yesOrNo.equals("yes")) {
-				yesOrNo.equals("yes");
-				System.out.println(shoppingCart);
-			} else {
-				yesOrNo.equals("no");
-			}
+			System.out.println(shoppingCart);
+
+			// System.out.println("Would you like to order anything else (yes or no)?");
+			yesOrNo = Validator.YesOrNo(scnr, "Would you like to order anything else (yes or no)?");
 
 		} while (yesOrNo.equals("yes"));
-		System.out.println("Exiting Program");
+
+		System.out.println("Thanks for your order!");
+		System.out.println("Here's what you got: ");
+		displayShoppingCart(shoppingCart, inventory);
+		// System.out.println(shoppingCart);
 
 		// average();
 		// highest();
 		// lowest();
+
+	}
+
+	private static void displayShoppingCart(ArrayList<String> shoppingCart, HashMap<String, Double> inventory) {
+		ArrayList<String> tempArray = shoppingCart;
+		String format2 = "%-12s    %s%n";
+
+		for (int i = 0; i < tempArray.size(); i++) {
+
+			String item = tempArray.get(i);
+
+			System.out.printf(format2, item, inventory.get(item));
+
+		}
 
 	}
 

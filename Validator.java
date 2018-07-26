@@ -1,6 +1,5 @@
 package collections;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,9 +77,24 @@ public class Validator {
 	 */
 
 	public static String getString(Scanner scnr, String prompt) {
-		// This approach uses exception handling.
-		System.out.print(prompt);
-		return scnr.nextLine();
+		System.out.println(prompt);
+		String userInput = scnr.nextLine();
+		boolean isValid = false;
+
+		do {
+			if (userInput.matches("[a-zA-Z\\s]+")) {
+				isValid = true;
+				// System.out.print("valid String");
+				return userInput;
+
+			} else {
+				isValid = false;
+				System.out.println(" That data does not exist. Please try again.please enter valid answer");
+				return getString(scnr, prompt);
+
+			}
+		} while (isValid == false);
+
 	}
 
 	/**
@@ -127,6 +141,28 @@ public class Validator {
 			}
 		} while (!isValid);
 		return date;
+
+	}
+
+	public static String YesOrNo(Scanner scnr, String prompt) {
+		String userInput;
+		boolean isValid = false;
+		do {
+			userInput = getString(scnr, prompt);
+			if (userInput.equals("yes")) {
+				isValid = true;
+				return userInput;
+			} else if (userInput.equals("no")) {
+				isValid = true;
+
+			} else if (!userInput.equals("yes") || !userInput.equals("no")) {
+				System.out.println("Only enter yes or no");
+				isValid = false;
+				return YesOrNo(scnr, prompt);
+			}
+
+		} while (isValid = false);
+		return userInput;
 
 	}
 

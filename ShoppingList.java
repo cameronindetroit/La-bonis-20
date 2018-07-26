@@ -10,21 +10,6 @@ import java.util.Scanner;
  * July 25th, 2018
  */
 
-// Display Inventory();
-//-------------------------
-// ask questions
-// "prompt"
-// "scnr"
-//---------------------------
-// average();
-// highest();
-// lowest();
-//---------------------------
-//Questions to ask
-//Enter item name:
-//Add another item?
-//---------------------------
-
 public class ShoppingList {
 
 	public static void main(String[] args) {
@@ -36,18 +21,18 @@ public class ShoppingList {
 		String newItem;
 		ArrayList<String> shoppingCart = new ArrayList<String>(); // shopping cart
 		HashMap<String, Double> inventory = new HashMap<>(); // inventory
-		boolean isValid = false;
+
 		String yesOrNo = "yes";
 
-		inventory = fillInventory(inventory);
+		inventory = ShoppingListMethods.fillInventory(inventory);
 		// displays the inventory
-		displayInventory(inventory);
+		ShoppingListMethods.displayInventory(inventory);
 
 		do {
 			// Enter item name
 			prompt = "What would you like to order?";
 			// fills the Inventory
-			newItem = enterItem(scnr, inventory, prompt);
+			newItem = ShoppingListMethods.enterItem(scnr, inventory, prompt);
 
 			// Conditional to make sure valid item is being added to shopping cart
 
@@ -55,82 +40,20 @@ public class ShoppingList {
 
 			System.out.println();
 
-			// add that item, to the shoppingCart
+			// System.out.println(shoppingCart);
 
-			System.out.println(shoppingCart);
-
-			// System.out.println("Would you like to order anything else (yes or no)?");
 			yesOrNo = Validator.YesOrNo(scnr, "Would you like to order anything else (yes or no)?");
 
 		} while (yesOrNo.equals("yes"));
 
 		System.out.println("Thanks for your order!");
 		System.out.println("Here's what you got: ");
-		displayShoppingCart(shoppingCart, inventory);
-		// System.out.println(shoppingCart);
+		ShoppingListMethods.displayShoppingCart(shoppingCart, inventory);
 
-		// average();
-		// highest();
-		// lowest();
+		ShoppingListMethods.average(shoppingCart, inventory);
 
-	}
-
-	private static void displayShoppingCart(ArrayList<String> shoppingCart, HashMap<String, Double> inventory) {
-		ArrayList<String> tempArray = shoppingCart;
-		String format2 = "%-12s    %s%n";
-
-		for (int i = 0; i < tempArray.size(); i++) {
-
-			String item = tempArray.get(i);
-
-			System.out.printf(format2, item, inventory.get(item));
-
-		}
+		ShoppingListMethods.highest(shoppingCart, inventory);
+		ShoppingListMethods.lowest(shoppingCart, inventory);
 
 	}
-
-	private static String enterItem(Scanner scnr, HashMap<String, Double> inventory, String prompt) {
-		System.out.println(prompt);
-		String userInput = scnr.nextLine().toLowerCase();
-
-		if (inventory.containsKey(userInput)) {
-			System.out.println("confirmation! " + userInput + " added to cart!");
-
-		} else {
-			System.out.println("item is not available. Please choose an item in out inventory");
-			enterItem(scnr, inventory, prompt);
-		}
-
-		return userInput;
-	}
-
-	private static HashMap<String, Double> fillInventory(HashMap<String, Double> inventory) {
-		// TODO Auto-generated method stub
-		inventory.put("apple", 0.99);
-		inventory.put("banana", 0.59);
-		inventory.put("cauliflower", 1.59);
-		inventory.put("dragonfruit", 2.19);
-		inventory.put("Elderberry", 1.79);
-		inventory.put("figs", 2.09);
-		inventory.put("grapefruit", 1.99);
-		inventory.put("honeydew", 3.49);
-		return inventory;
-
-	}
-
-	private static void displayInventory(HashMap<String, Double> inventory) {
-
-		String format = "%s\t\t%s";
-		String format2 = "%-12s    %s%n";
-		System.out.printf(format2, "item", "price");
-
-		System.out.println("======================");
-		// Loop through inventory by key
-		for (String item : inventory.keySet()) {
-			System.out.printf(format2, item, inventory.get(item));
-
-		}
-
-	}
-
 }
